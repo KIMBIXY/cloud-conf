@@ -1,0 +1,61 @@
+///modification du fichier config pour avoir plusier compte git sur une macheine
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa
+
+Host powerksoft
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id-powerksoft
+
+
+2) Utilisez l’alias powerksoft :
+
+Lorsque vous configurez un alias pour un dépôt, vous devez utiliser cet alias lors de la configuration de votre dépôt Git. Par exemple, vous devriez changer l'URL de votre dépôt pour utiliser powerksoft :
+Copier
+git remote set-url origin powerksoft:Powerk-soft/DSF-Gen.git
+
+2) Testez la connexion SSH :
+
+Testez la connexion à GitHub pour vous assurer que tout fonctionne correctement :
+Copier
+ssh -T powerksoft
+
+
+Pour générer une clé SSH, vous pouvez utiliser la commande suivante dans votre terminal :
+
+Copier
+ssh-keygen -t rsa -b 4096 -C "votre_email@example.com"
+Voici les étapes à suivre :
+
+Ouvrez votre terminal.
+Exécutez la commande ci-dessus. Remplacez votre_email@example.com par l'adresse e-mail associée à votre compte GitHub.
+Lorsque vous êtes invité à spécifier le nom du fichier, vous pouvez appuyer sur Entrée pour accepter le nom par défaut (~/.ssh/id_rsa) ou entrer un nom différent (par exemple, ~/.ssh/id_powerksoft).
+Vous serez ensuite invité à entrer une phrase de passe. Vous pouvez choisir d'en mettre une ou de laisser vide pour ne pas en avoir.
+La clé sera générée et vous verrez un message indiquant où elle a été enregistrée.
+Ajout de la clé SSH à l'agent SSH
+Après avoir généré la clé, vous devez l'ajouter à l'agent SSH :
+
+Copier
+ssh-add ~/.ssh/id_rsa
+Ou, si vous avez utilisé un nom différent :
+
+Copier
+ssh-add ~/.ssh/id_powerksoft
+Ajout de la clé publique à GitHub
+Copiez la clé publique dans le presse-papiers :
+
+Copier
+cat ~/.ssh/id_rsa.pub
+Ou, si vous avez utilisé un nom différent :
+
+Copier
+cat ~/.ssh/id_powerksoft.pub
+Connectez-vous à votre compte GitHub.
+
+Allez dans Settings (Paramètres) > SSH and GPG keys > New SSH key.
+
+Collez la clé publique dans le champ prévu à cet effet et donnez-lui un titre.
+
+Cliquez sur Add SSH key.
